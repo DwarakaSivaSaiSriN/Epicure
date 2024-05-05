@@ -33,7 +33,7 @@ const createClientOrEatery = async (req, res) => {
 
     if (clientCred.clientType === 'client') {
         await clientsCollectionObj.insertOne(clientCred)
-        await cartCollectionObj.insertOne({clientname : clientCred.clientname , eateryname : null , cartItems : []})
+        await cartCollectionObj.insertOne({ clientname: clientCred.clientname, eateryname: null, cartItems: [] })
         res.send({ message: "A Client created" })
     }
 
@@ -82,7 +82,7 @@ const clientOrEateryLogin = async (req, res) => {
             } else {
                 const signedToken = jwt.sign({ eateryname: dbclient.eateryname }, process.env.SECRET_KEY, { expiresIn: '1h' })
                 delete dbclient.password
-                res.send({ message: "login success", token: signedToken, eatery: dbclient })
+                res.send({ message: "login success", token: signedToken, client: dbclient })
             }
         }
     }

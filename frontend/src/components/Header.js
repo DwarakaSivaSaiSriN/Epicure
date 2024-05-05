@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetState } from '../redux/slices/clientLoginSlice'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 
 function Header() {
 
     const { isPending, currentClient, errStatus, errMsg, loginStatus } = useSelector((state) => state.clientLogin)
-    let dispatch = useDispatch
+    let dispatch = useDispatch()
 
     function signoutFunc() {
         sessionStorage.removeItem('token')
@@ -32,7 +32,9 @@ function Header() {
                         <button type='button'
                             className='navbar-toggler btn-dark'
                             data-bs-toggle='collapse'
-                            data-bs-target='#navbarCollapseContent'>
+                            data-bs-target='#navbarCollapseContent'
+                            aria-controls='navbarCollapseContent'
+                            aria-expanded='false'>
                             <span className='navbar-toggler-icon bg-white' ></span>
                         </button>
                         <div className="collapse navbar-collapse" id="navbarCollapseContent">
@@ -53,28 +55,20 @@ function Header() {
                                     ) : (
                                         <>
                                             {
-                                                currentClient.clientType === 'client' ? (
-                                                    <>
-                                                        <li className='nav-item'>
-                                                            <FontAwesomeIcon icon="fa-solid faShoppingCart" />
-                                                        </li>
-                                                        <li className='nav-item'>
-                                                            <NavLink className='nav-link text-white' to='signin' onClick={signoutFunc}>Sign out</NavLink>
-                                                        </li>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <li className='nav-item'>
-                                                            <NavLink className='nav-link text-white' to='signin' onClick={signoutFunc}>Sign out</NavLink>
-                                                        </li>
-                                                    </>
-                                                )
+                                                currentClient.clientType === 'client' && (<>
+                                                    <li className='nav-item'>
+                                                        <NavLink className='nav-link text-white' to=''><i class="fa-solid fa-cart-shopping"></i></NavLink>
+                                                    </li>
+                                                </>)
                                             }
+                                            <li className='nav-item'>
+                                                <NavLink className='nav-link text-white' to='' onClick={signoutFunc}><i className="fa fa-sign-out pull-right"></i> Signout</NavLink>
+                                            </li>
                                         </>
                                     )
                                 }
 
-                            </ul>
+                            </ul>s
                         </div>
                     </div>
                 </div>

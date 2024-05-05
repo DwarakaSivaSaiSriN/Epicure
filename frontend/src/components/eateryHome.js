@@ -1,9 +1,9 @@
 import React from 'react'
 
-function eateryHome() {
+function EateryHome() {
     return (
-        <div>eateryHome</div>
+        <div>EateryHome</div>
     )
 }
 
-export default eateryHome
+export default EateryHome

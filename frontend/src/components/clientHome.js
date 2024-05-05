@@ -1,9 +1,9 @@
 import React from 'react'
 
-function clientHome() {
+function ClientHome() {
     return (
-        <div>clientHome</div>
+        <div>ClientHome</div>
     )
 }
 
-export default clientHome
+export default ClientHome

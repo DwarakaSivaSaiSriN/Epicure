@@ -11,14 +11,16 @@ function Login() {
     let navigate = useNavigate()
     const { isPending, currentClient, errStatus, errMsg, loginStatus } = useSelector((state) => state.clientLogin)
 
-    function handleFormSubmit(data) {
-        let actionObj = clientLoginThunk(data)
+    function handleFormSubmit(clientCred) {
+        console.log(clientCred)
+        let actionObj = clientLoginThunk(clientCred)
         dispatch(actionObj)
     }
 
 
     useEffect(() => {
         if (loginStatus === true) {
+            console.log(currentClient.clientType)
             if (currentClient.clientType === 'client') {
                 navigate('/client-home')
             }
@@ -39,14 +41,14 @@ function Login() {
                         <form onSubmit={handleSubmit(handleFormSubmit)}>
                             {/*clientType*/}
                             <div className='p-2'>
-                                <label className='form-check-label me-3' htmlFor='client'>Login as : </label>
+                                <label className='form-check-label me-3' htmlFor='clientType'>Login as : </label>
                                 <div className='form-check form-check-inline'>
                                     <input type="radio" className='form-check-input' id='client' value="client" {...register("clientType", { required: "Client type is required" })} />
                                     <label htmlFor="client" className='form-check-label'>Client</label>
                                 </div>
                                 <div className='form-check form-check-inline'>
                                     <input type="radio" className='form-check-input' id='eatery' value="eatery" {...register("clientType")} />
-                                    <label htmlFor="client" className='form-check-label'>Eatery</label>
+                                    <label htmlFor="eatery" className='form-check-label'>Eatery</label>
                                 </div>
                             </div>
                             {/*clientName*/}

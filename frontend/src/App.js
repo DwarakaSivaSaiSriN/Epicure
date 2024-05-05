@@ -1,11 +1,12 @@
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+// The component name should always be PascalCase
 import Rootlayout from './Rootlayout'
 import Home from './components/Home'
 import Signin from './components/Signin'
 import Login from './components/Login'
-import clientHome from './components/clientHome'
-import eateryHome from './components/eateryHome'
+import ClientHome from './components/ClientHome'
+import EateryHome from './components/EateryHome'
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
       element: <Home />
     },
     {
-      path: '/signin',
+      path: 'signin',
       element: <Signin />
     },
     {
@@ -25,12 +26,12 @@ function App() {
       element: <Login />
     },
     {
-      path: '/client-home',
-      element: <clientHome />
+      path: 'client-home',
+      element: <ClientHome />
     },
     {
-      path: '/eatery-home',
-      element: <eateryHome />
+      path: 'eatery-home',
+      element: <EateryHome />
     }
     ]
   }])

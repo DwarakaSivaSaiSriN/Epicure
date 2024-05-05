@@ -3,10 +3,10 @@ import axios from 'axios'
 
 export let clientLoginThunk = createAsyncThunk('client login', async (clientCred, thunkApi) => {
     let res
-    if (clientCred === 'client') {
+    if (clientCred.clientType === 'client') {
         res = await axios.post('http://localhost:4000/client-api/login', clientCred)
     }
-    if (clientCred === 'eatery') {
+    if (clientCred.clientType === 'eatery') {
         res = await axios.post('http://localhost:4000/eatery-api/login', clientCred)
     }
     if (res.data.message === 'login success') {
@@ -18,7 +18,7 @@ export let clientLoginThunk = createAsyncThunk('client login', async (clientCred
         sessionStorage.setItem('token', res.data.token)
         //sessionStorage.getItem()
         //sessionStorage.removeItem()
-        return res.data
+        return res.data.client
     } else {
         thunkApi.rejectWithValue(res.data.message)
     }
@@ -59,7 +59,7 @@ const clientLoginSlice = createSlice({
 })
 
 //export the root reducers
-export default clientLoginSlice
+export default clientLoginSlice.reducer
 
 //export the action creator functions 
 export const { resetState } = clientLoginSlice.actions
