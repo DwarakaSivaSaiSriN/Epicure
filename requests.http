@@ -1,0 +1,181 @@
+### Client regestration (cart creation)
+post http://localhost:4000/client-api/client-reg
+Content-Type: application/json
+
+{
+    "clientType" : "client" ,
+    "clientname" : "dwaraka" ,
+    "password" : "dwaraka" ,
+    "email" : "dwaraka@email.com",
+    "address" : "VNRVJIET"
+}
+
+# {
+#     "clientType" : "client" ,
+#     "clientname" : "namb" ,
+#     "password" : "namb" ,
+#     "email" : "namb@email.com",
+#     "address" : "VNRVJIET"
+# }
+
+
+### Client login
+post http://localhost:4000/client-api/login
+Content-Type: application/json
+
+{
+    "clientType" : "client" ,
+    "clientname" : "dwaraka" ,
+    "password" : "dwaraka" 
+}
+
+### Eatery regestration
+post http://localhost:4000/eatery-api/eatery-reg
+Content-Type: application/json
+
+{
+    "clientType" : "eatery" ,
+    "eateryname" : "siva" ,
+    "password" : "siva" ,
+    "email" : "siva@email.com",
+    "address" : "mba"
+}
+
+###Eatery Login
+post http://localhost:4000/eatery-api/login
+Content-Type: application/json
+
+{
+    "clientType" : "eatery" ,
+    "eateryname" : "siva" ,
+    "password" : "siva"
+}
+
+#########..................................... FOOD .................................
+
+### Add new food
+post http://localhost:4000/eatery-api/new-food
+Content-Type: application/json
+
+{
+    "foodid" : "{{$timestamp}}",
+    "eateryname" : "siva",
+    "foodname" : "Choco Icecream",
+    "foodsubs" : "Super tasty" ,
+    "foodseg" : "veg",
+    "foodtype" : "pack",
+    "foodcat" : "Ice cream",
+    "foodqty" : 5,
+    "foodcost" : 30,
+    "foodimg" : "jpg",
+    "status" : true
+}
+
+### Edit food
+put http://localhost:4000/eatery-api/food
+Content-Type: application/json
+
+{
+    "foodid" : "1714638131",
+    "eateryname" : "sai",
+    "foodname" : "Choco Icecream",
+    "foodsubs" : "Super tasty" ,
+    "foodseg" : "veg",
+    "foodtype" : "pack",
+    "foodcat" : "Ice cream",
+    "foodqty" : 10,
+    "foodcost" : 25,
+    "foodimg" : "jpg",
+    "status" : true
+}
+
+### (soft)Delete food
+put http://localhost:4000/eatery-api/food/1714638131
+
+####### ............................. CART .....................................
+
+### read all the items in the cart
+get  http://localhost:4000/client-api/all-cart/dwaraka
+
+### Add food to cart
+    #maybe make the cost dynamic in backend
+post http://localhost:4000/client-api/cart/dwaraka
+Content-Type: application/json
+
+{
+    "eateryname": "siva",
+    "fooddata": {
+        "foodid": "1714638166",
+        "foodname": "Choco Icecream",
+        "foodseg": "veg",
+        "foodqty": 1,
+        "foodcat": "Icecream",
+        "foodtype": "pack",
+        "foodcost": 30
+    }
+}
+
+# {
+#     "eateryname":"siva",
+#     "fooddata":{
+#         "foodid":"1714638157",
+#         "foodname":"Velvet Icecream",
+#         "foodsubs":"Super tasty",
+#         "foodseg":"veg",
+#         "foodqty":5,
+#         "foodtype":"pack",
+#         "foodcat":"Ice cream",
+#         "foodcost":30
+#     }
+# }
+
+### Edit food in cart
+post http://localhost:4000/client-api/ed-cart/1714638131/dwaraka
+Content-Type: application/json
+
+{
+    "foodid": "1714638131",
+        "foodname": "Choco Icecream",
+        "foodseg": "veg",
+        "foodqty": "3",
+        "foodcat": "Icecream",
+        "foodtype": "pack",
+        "foodcost": "75"
+}
+
+### (Hard)Delete a food item in the cart
+delete http://localhost:4000/client-api/cart/1714638166
+Content-Type: application/json
+
+{
+    "foodid" : "1714638131",
+    "eateryname" : "sai",
+    "clientname" : "dwaraka"
+}
+
+######### ......................... ORDERS ....................................
+
+### Successfully placed order
+    #(Hard) Delete all items in the cart
+    # place it in the order list
+    #(order)status = false -> order not recieved yet
+post http://localhost:4000/client-api/order/dwaraka
+Content-Type: application/json
+
+{
+    "orderid" : "{{$timestamp}}",
+    "eateryname" : null ,
+    "dateOfCreation" : "${{$datetime iso8601}}",
+    "items" : []
+}
+
+### Order complete ((order)status = true)
+    ### (Soft) delete for current orders
+put http://localhost:4000/eatery-api/order/1714678734
+
+
+### get all orders of client
+get http://localhost:4000/client-api/orders/dwaraka
+
+### get all orders of eatery
+get http://localhost:4000/eatery-api/orders/siva
