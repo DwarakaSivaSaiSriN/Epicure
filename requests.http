@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
     "clientType" : "client" ,
-    "clientname" : "dwaraka" ,
+    "clientName" : "dwaraka" ,
     "password" : "dwaraka" ,
     "email" : "dwaraka@email.com",
     "address" : "VNRVJIET"
@@ -12,7 +12,7 @@ Content-Type: application/json
 
 # {
 #     "clientType" : "client" ,
-#     "clientname" : "namb" ,
+#     "clientName" : "namb" ,
 #     "password" : "namb" ,
 #     "email" : "namb@email.com",
 #     "address" : "VNRVJIET"
@@ -25,7 +25,7 @@ Content-Type: application/json
 
 {
     "clientType" : "client" ,
-    "clientname" : "dwaraka" ,
+    "clientName" : "dwaraka" ,
     "password" : "dwaraka" 
 }
 
@@ -35,7 +35,7 @@ Content-Type: application/json
 
 {
     "clientType" : "eatery" ,
-    "eateryname" : "siva" ,
+    "eateryName" : "siva" ,
     "password" : "siva" ,
     "email" : "siva@email.com",
     "address" : "mba"
@@ -47,9 +47,15 @@ Content-Type: application/json
 
 {
     "clientType" : "eatery" ,
-    "eateryname" : "siva" ,
+    "eateryName" : "siva" ,
     "password" : "siva"
 }
+
+### Get all eateries
+get http://localhost:4000/eatery-api/eateries
+
+### Get specific eatery
+get http://localhost:4000/eatery-api/eateries/siva
 
 #########..................................... FOOD .................................
 
@@ -59,7 +65,7 @@ Content-Type: application/json
 
 {
     "foodid" : "{{$timestamp}}",
-    "eateryname" : "siva",
+    "eateryName" : "siva",
     "foodname" : "Choco Icecream",
     "foodsubs" : "Super tasty" ,
     "foodseg" : "veg",
@@ -103,7 +109,7 @@ post http://localhost:4000/client-api/cart/dwaraka
 Content-Type: application/json
 
 {
-    "eateryname": "siva",
+    "eateryName": "siva",
     "fooddata": {
         "foodid": "1714638166",
         "foodname": "Choco Icecream",
@@ -116,7 +122,7 @@ Content-Type: application/json
 }
 
 # {
-#     "eateryname":"siva",
+#     "eateryName":"siva",
 #     "fooddata":{
 #         "foodid":"1714638157",
 #         "foodname":"Velvet Icecream",
@@ -149,8 +155,8 @@ Content-Type: application/json
 
 {
     "foodid" : "1714638131",
-    "eateryname" : "sai",
-    "clientname" : "dwaraka"
+    "eateryName" : "sai",
+    "clientName" : "dwaraka"
 }
 
 ######### ......................... ORDERS ....................................
@@ -164,7 +170,7 @@ Content-Type: application/json
 
 {
     "orderid" : "{{$timestamp}}",
-    "eateryname" : null ,
+    "eateryName" : null ,
     "dateOfCreation" : "${{$datetime iso8601}}",
     "items" : []
 }

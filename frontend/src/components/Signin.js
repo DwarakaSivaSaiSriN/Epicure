@@ -11,7 +11,7 @@ function Signin() {
     let navigate = useNavigate()
 
     async function onSigninFormSubmit(data) {
-        console.log(data)
+        //console.log(data)
         let res
         if (data.clientType == 'client') {
             res = await axios.post('http://localhost:4000/client-api/client-reg', data)

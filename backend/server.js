@@ -8,7 +8,7 @@ require("dotenv").config()
 app.use(exp.json())
 
 
-app.use(exp.static(path.join(__dirname , '../frontend/build')))
+app.use(exp.static(path.join(__dirname, '../frontend/build')))
 
 const mongoClient = require("mongodb").MongoClient
 
@@ -49,9 +49,11 @@ app.use('/eatery-api', eateryApp);
 //     res.sendFile(path.join(__dirname , '../frontend/build/index.html'))
 // })
 
-app.use((err, req, res, next) => {
-    res.send({ status: "error", message: err.message })
-});
+// app.use((err, req, res, next) => {
+//     res.send({ status: "error", message: err.message })
+// });
+
+app.get("/login", (req, res) => res.send("Login Page"))
 
 const port = process.env.PORT || 4000
 

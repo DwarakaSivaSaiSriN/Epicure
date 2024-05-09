@@ -20,24 +20,19 @@ function Header() {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg bg-dark">
+            <nav className="navbar navbar-expand-sm bg-dark">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#">
-                        <div className='container text-white'>
-                            <h3>EPICURE</h3>
-                        </div>
-                        {/* <img src={logo} alt="" width="60px" /> */}
-                    </a>
+                    <NavLink className="navbar-brand text-white" to=''>
+                        <h3>EPICURE</h3>
+                    </NavLink>
                     <div>
                         <button type='button'
                             className='navbar-toggler btn-dark'
                             data-bs-toggle='collapse'
-                            data-bs-target='#navbarCollapseContent'
-                            aria-controls='navbarCollapseContent'
-                            aria-expanded='false'>
+                            data-bs-target='#navbarSupportedContent'>
                             <span className='navbar-toggler-icon bg-white' ></span>
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarCollapseContent">
+                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className='navbar-nav bg-dark'>
                                 {
                                     loginStatus === false ? (
@@ -57,10 +52,13 @@ function Header() {
                                             {
                                                 currentClient.clientType === 'client' && (<>
                                                     <li className='nav-item'>
-                                                        <NavLink className='nav-link text-white' to=''><i class="fa-solid fa-cart-shopping"></i></NavLink>
+                                                        <NavLink className='nav-link text-white' to=''><i class="fa-solid fa-cart-shopping"></i>Cart</NavLink>
                                                     </li>
                                                 </>)
                                             }
+                                            <li className='nav-item'>
+                                                <NavLink className='nav-link text-white' to='' ><i class="fa-solid fa-stopwatch"></i> Orders</NavLink>
+                                            </li>
                                             <li className='nav-item'>
                                                 <NavLink className='nav-link text-white' to='' onClick={signoutFunc}><i className="fa fa-sign-out pull-right"></i> Signout</NavLink>
                                             </li>

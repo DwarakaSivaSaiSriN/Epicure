@@ -1,19 +1,28 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import ClientHome from './ClientHome'
+import EateryHome from './EateryHome'
 
 function Home() {
 
-    function setSearchQuery(data) {
-        console.log(data)
-    }
+    const { isPending, currentClient, errStatus, errMsg, loginStatus } = useSelector((state) => state.clientLogin)
+
+
 
     return (
-        <div className='container text-center'>
-            <div className='container text-center text-dark'>
-                <h1>HELLO</h1>
-            </div>
-            {/* Search box */}
-            <div className="input-box mt-3 ">
-                <input type="search" name="searchitem" id="searchitem" className="search-input" onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search Item" />
+        <div>
+            <div className='container-fluid'>
+                {
+                    loginStatus == true ? (
+                        <>
+                        {
+                            currentClient === 'client' ? (
+                                <ClientHome />
+                            ) :
+                            ( <EateryHome/> )
+                        }
+                        </> ) : (<ClientHome/>)
+                }
             </div>
         </div>
     );

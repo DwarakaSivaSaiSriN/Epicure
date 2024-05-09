@@ -12,7 +12,7 @@ function Login() {
     const { isPending, currentClient, errStatus, errMsg, loginStatus } = useSelector((state) => state.clientLogin)
 
     function handleFormSubmit(clientCred) {
-        console.log(clientCred)
+        //console.log(clientCred)
         let actionObj = clientLoginThunk(clientCred)
         dispatch(actionObj)
     }
@@ -38,6 +38,9 @@ function Login() {
                         <h2 className="p-3">Login</h2>
                     </div>
                     <div className='card-body mt-2 p-2 text-center'>
+                        {
+                            errStatus === true && <p className='text-danger'>{errMsg}</p>
+                        }
                         <form onSubmit={handleSubmit(handleFormSubmit)}>
                             {/*clientType*/}
                             <div className='p-2'>
