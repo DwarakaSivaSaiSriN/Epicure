@@ -62,6 +62,12 @@ function Signin() {
                                 <div className='p-2 mt-2'>
                                     <input type='email' className='' id="mail" placeholder='Email' {...register("mail", { required: true })} />
                                 </div>
+                                {/* Address */}
+                                <select className='form-select-sm w-50 mx-auto' aria-label='Default select' {...register("address", {required : "Address Required"})}>
+                                    <option selected disabled>Address</option>
+                                    <option value="mba">MBA</option>
+                                    <option value = "annapurna">Annapurna</option>
+                                </select>
                                 {/* password */}
                                 <div className='p-2 mt-2'>
                                     <input type='password' className='' id="password" placeholder='Password' {...register("password", { required: true })} />

@@ -28,20 +28,20 @@ clientApp.post('/login', expressAsyncHandler(clientOrEateryLogin))
 clientApp.post('/cart/:name', verifyToken, expressAsyncHandler(async (req, res) => {
     const getname = req.params.name
     const getitem = req.body;
-    const cartdata = await cartCollection.findOne({ clientname: getname })
+    const cartdata = await cartCollection.findOne({ clientName: getname })
 
-    if (cartdata.eateryname !== null) {
-        if (cartdata.eateryname === getitem.eateryname) {
-            await cartCollection.updateOne({ clientname: getname }, { $addToSet: { cartItems: getitem.fooddata } })
+    if (cartdata.eateryName !== null) {
+        if (cartdata.eateryName === getitem.eateryName) {
+            await cartCollection.updateOne({ clientName: getname }, { $addToSet: { cartItems: getitem.fooddata } })
         }
         else {
             res.send({ message: "Food can be added to cart if they all are of the same eatery" })
         }
     }
     else {
-        await cartCollection.findOneAndUpdate({ clientname: getname }, { $set: { eateryname: getitem.eateryname } })
+        await cartCollection.findOneAndUpdate({ clientName: getname }, { $set: { eateryName: getitem.eateryName } })
 
-        await cartCollection.updateOne({ clientname: getname }, { $addToSet: { cartItems: getitem.fooddata } })
+        await cartCollection.updateOne({ clientName: getname }, { $addToSet: { cartItems: getitem.fooddata } })
     }
 
     res.send({ message: "Item added to cart", payload: getitem })
@@ -51,7 +51,7 @@ clientApp.post('/cart/:name', verifyToken, expressAsyncHandler(async (req, res) 
 //read cart items
 clientApp.get('/all-cart/:name', verifyToken, expressAsyncHandler(async (req, res) => {
     const getname = req.params.name
-    const cartdata = await cartCollection.findOne({ clientname: getname })
+    const cartdata = await cartCollection.findOne({ clientName: getname })
 
     res.send({ message: "Items in the cart", payload: cartdata.cartItems })
 
@@ -65,7 +65,7 @@ clientApp.post('/ed-cart/:id/:name', verifyToken, expressAsyncHandler(async (req
     const getfood = req.body
 
     await cartCollection.findOneAndUpdate(
-        { clientname: getname, "cartItems.foodid": getid },
+        { clientName: getname, "cartItems.foodid": getid },
         { $set: { "cartItems.$": getfood } })
 
     res.send({ message: "Food Item modified in the cart" })
@@ -77,15 +77,15 @@ clientApp.delete('/cart/:foodid', verifyToken, expressAsyncHandler(async (req, r
 
     const getfood = req.body
 
-    const getcart = await cartCollection.findOne({ clientname: getfood.clientname })
+    const getcart = await cartCollection.findOne({ clientName: getfood.clientName })
 
     const getitems = await getcart.cartItems.filter((fooditem) => fooditem.foodid != getid)
 
     if (getitems.length !== 0) {
-        await cartCollection.findOneAndUpdate({ clientname: getfood.clientname }, { $set: { cartItems: getitems } })
+        await cartCollection.findOneAndUpdate({ clientName: getfood.clientName }, { $set: { cartItems: getitems } })
     }
     else {
-        await cartCollection.findOneAndUpdate({ clientname: getfood.clientname }, { $set: { cartItems: [], eateryname: null } })
+        await cartCollection.findOneAndUpdate({ clientName: getfood.clientName }, { $set: { cartItems: [], eateryName: null } })
     }
     res.send({ message: "Food Item removed from cart" })
 
@@ -97,18 +97,18 @@ clientApp.post('/order/:name', verifyToken, expressAsyncHandler(async (req, res)
     const getname = req.params.name
     const getbody = req.body
 
-    const getcart = await cartCollection.findOne({ clientname: getname })
+    const getcart = await cartCollection.findOne({ clientName: getname })
 
     if (getcart.cartItems !== null) {
-        getbody.eateryname = getcart.eateryname
+        getbody.eateryName = getcart.eateryName
         getbody.items = getcart.cartItems
 
         // add client name
-        getbody.clientname = getname
+        getbody.clientName = getname
         //calculate cost
         getbody.totalCost = getcart.cartItems.reduce((acc, cartItem) => acc + cartItem.foodcost, 0)
         //delete(Hard) items in the cart
-        await cartCollection.findOneAndUpdate({ clientname: getname }, { $set: { cartItems: [], eateryname: null } })
+        await cartCollection.findOneAndUpdate({ clientName: getname }, { $set: { cartItems: [], eateryName: null } })
         //put status = false
         getbody.status = false
 
@@ -126,7 +126,7 @@ clientApp.post('/order/:name', verifyToken, expressAsyncHandler(async (req, res)
 //get all orders for client
 clientApp.get('/orders/:name', verifyToken, expressAsyncHandler(async (req, res) => {
     const getname = req.params.name
-    const getorders = await ordersCollection.find({ clientname: getname }).toArray()
+    const getorders = await ordersCollection.find({ clientName: getname }).toArray()
     res.send({ message: "All orders for client", payload: getorders })
 }))
 

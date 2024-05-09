@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import axiosWithToken  from "../axiosWithToken";
+import axiosWithToken from "../axiosWithToken";
 import getAxiosWithToken from "../axiosWithToken";
 
 function ClientHome() {
@@ -10,7 +10,7 @@ function ClientHome() {
   let [eateriesList, setEateriesList] = useState([]);
 
   let axiosWithToken = getAxiosWithToken()
-  
+
   const getEateries = async () => {
     let res = await axiosWithToken.get(
       "http://localhost:4000/eatery-api/eateries"
@@ -28,19 +28,11 @@ function ClientHome() {
       <div classname="row row-cols-1">
         {eateriesList.map((eatery) => (
           <div>
-            <div className="row row-cols-1 row-cols-sm-2 ">
-              <div>{eatery.clientName}</div>
-              <div classname="text-end">{eatery.address}</div>
+            <div className="row row-cols-1 row-cols-sm-2 me-4 ms-4 mt-3 bg-light fs-4">
+              <div className="text-start ">{eatery.clientName}</div>
+              <div className="text-end ">{eatery.address.toUpperCase()}</div>
             </div>
-            <hr
-              style={{
-                height: "2px",
-                borderWidth: "0",
-                color: "gray",
-                backgroundColor: "gray",
-              }}
-            />
-
+            <hr className = "me-4 ms-4" style={{ height: "2px", borderWidth: "0", color: "green", backgroundColor: "gray", }} />
             {/* <div className="row row-cols-sm-1 row-cols-mg-2 row-cols-lg-4"></div> */}
           </div>
         ))}

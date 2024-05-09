@@ -54,8 +54,8 @@ Content-Type: application/json
 ### Get all eateries
 get http://localhost:4000/eatery-api/eateries
 
-### Get specific eatery
-get http://localhost:4000/eatery-api/eateries/siva
+# ### Get specific eatery
+# get http://localhost:4000/eatery-api/eateries/siva
 
 #########..................................... FOOD .................................
 
@@ -94,6 +94,9 @@ Content-Type: application/json
     "foodimg" : "jpg",
     "status" : true
 }
+
+### get food items of an eatery
+get http://localhost:4000/eatery-api/food/siva
 
 ### (soft)Delete food
 put http://localhost:4000/eatery-api/food/1714638131
